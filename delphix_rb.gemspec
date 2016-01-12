@@ -19,11 +19,15 @@ Gem::Specification.new do |s|
     "README.md"
   ]
   s.files = [
+    ".ruby-gemset",
+    ".ruby-version",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE",
     "README.md",
     "Rakefile",
     "VERSION",
+    "delphix_rb.gemspec",
     "lib/delphix_rb.rb",
     "test/helper.rb",
     "test/test_delphix_rb.rb"
