@@ -17,9 +17,9 @@ Jeweler::Tasks.new do |gem|
   gem.name = "delphix_rb"
   gem.homepage = "http://github.com/mickuehl/delphix_rb"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "michael@ratchet.cc"
+  gem.summary = %Q{Delphix Engine REST API client in Ruby}
+  gem.description = %Q{Delphix Engine REST API}
+  gem.email = "michael.kuehl@delphix.com"
   gem.authors = ["Michael Kuehl"]
   # dependencies defined in Gemfile
 end
