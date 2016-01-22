@@ -7,7 +7,7 @@ class Delphix::Repository
   end
   
   def refresh_details
-    @details = get("/resources/json/delphix/repository/#{reference}", nil)['result']
+    @details = delphix_get("/resources/json/delphix/repository/#{reference}", nil)['result']
   end
     
 end

@@ -26,7 +26,7 @@ class Delphix::Environment
   # inherited operations
   
   def refresh_details
-    @details = get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = delphix_get("#{base_endpoint}/#{reference}", nil)['result']
   end
   
   def base_endpoint

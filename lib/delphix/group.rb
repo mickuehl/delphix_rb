@@ -7,7 +7,7 @@ class Delphix::Group
   end
   
   def refresh_details
-    @details = get("/resources/json/delphix/group/#{reference}", nil)['result']
+    @details = delphix_get("/resources/json/delphix/group/#{reference}", nil)['result']
   end
   
   def self.create(name)
