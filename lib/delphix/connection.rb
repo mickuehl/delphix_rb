@@ -1,5 +1,7 @@
+
 # This class represents a Connection to a Delphix Engine. The Connection is
 # immutable in that once the url and options is set they cannot be changed.
+
 class Delphix::Connection
   include Delphix::Error
   
@@ -20,13 +22,6 @@ class Delphix::Connection
     end
   end
   
-  # The actual client that sends HTTP methods to the Delphix Engine.
-  def session
-    @session
-  end
-  
-  private :session
-  
   # Send a request to the server
   def request(*args, &block)
     
@@ -35,7 +30,7 @@ class Delphix::Connection
     log_request(request) if Delphix.debug
     
     # execute the request and grao the session cookie if not already set
-    response = session.request(request)
+    response = @session.request(request)
     @session_cookie ||= cookie?(response)
     
     log_response(response) if Delphix.debug

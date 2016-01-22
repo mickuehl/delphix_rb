@@ -2,10 +2,8 @@
 class Delphix::Group
   include Delphix::Base
   
-  def initialize(reference)
-    @connection = Delphix.connection
-    @info = { 'reference' => reference }
-    @details = nil
+  def initialize(reference, details=nil)
+    super(reference, details)
   end
   
   def refresh_details
@@ -23,7 +21,7 @@ class Delphix::Group
     group = Delphix::Group.new ref
     
     # refresh the object from the DE
-    group.details
+    group.refresh_details
     
     group
   end

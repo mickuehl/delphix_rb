@@ -5,10 +5,8 @@ require 'delphix/repository'
 class Delphix::Environment
   include Delphix::Base
   
-  def initialize(reference)
-    @connection = Delphix.connection
-    @info = { 'reference' => reference }
-    @details = nil
+  def initialize(reference, details=nil)
+    super(reference, details)
   end
   
   def repositories
@@ -58,7 +56,7 @@ class Delphix::Environment
     env = Delphix::Environment.new ref
     
     # refresh the object from the DE
-    env.details
+    env.refresh_details
     
     env
   end

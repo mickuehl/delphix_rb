@@ -14,13 +14,12 @@ module Delphix
   require 'delphix/repository'
   
   def authenticate!(username,password)
+    
     case
-    when !username.is_a?(String)
-      raise ArgumentError, "Expected a String, got: '#{username}'"
-    when !password.is_a?(String)
-      raise ArgumentError, "Expected a String, got: '#{password}'"
-    else
-      @username, @password = username, password
+      when !username.is_a?(String)
+        raise ArgumentError, "Expected a String, got: '#{username}'"
+      when !password.is_a?(String)
+        raise ArgumentError, "Expected a String, got: '#{password}'"
     end
     
     reset_connection!
@@ -50,8 +49,8 @@ module Delphix
   def environments
     envs = BaseArray.new
     result = get('/resources/json/delphix/environment', nil)['result']
-    result.each do |o|
-      envs << Environment.new(connection, o)
+    result.each do |env|
+      envs << Environment.new(env['reference'],env)
     end
     envs
   end
@@ -59,8 +58,8 @@ module Delphix
   def groups
     groups = BaseArray.new
     result = get('/resources/json/delphix/group', nil)['result']
-    result.each do |o|
-      groups << Group.new(connection, o)
+    result.each do |group|
+      groups << Group.new(group['reference'],group)
     end
     groups
   end
@@ -68,8 +67,8 @@ module Delphix
   def repositories
     repos = BaseArray.new
     result = get('/resources/json/delphix/repository', nil)['result']
-    result.each do |o|
-      repos << Repository.new(connection, o)
+    result.each do |repo|
+      repos << Repository.new(repo['reference'],repo)
     end
     repos
   end
@@ -109,14 +108,6 @@ module Delphix
     reset_connection!
   end
 
-  def connection
-    @connection ||= Connection.new(url, options)
-  end
-
-  def reset_connection!
-    @connection = nil
-  end
-  
   def debug
     @debug || false
   end
@@ -126,6 +117,14 @@ module Delphix
   end
   
 private
+  
+  def connection
+    @connection ||= Connection.new(url, options)
+  end
+
+  def reset_connection!
+    @connection = nil
+  end
   
   def env_url
     ENV['DELPHIX_URL'] || default_url
