@@ -21,7 +21,14 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Delphix Engine REST API}
   gem.email = "michael.kuehl@delphix.com"
   gem.authors = ["Michael Kuehl"]
+  
+  # exclude tests and examples
+  gem.files.exclude 'examples/*'
+  gem.files.exclude 'test/*'
+  
   # dependencies defined in Gemfile
+  gem.add_dependency 'excon', '~> 0.45.4'
+  
 end
 Jeweler::RubygemsDotOrgTasks.new
 

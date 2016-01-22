@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Michael Kuehl"]
-  s.date = "2016-01-12"
+  s.date = "2016-01-22"
   s.description = "Delphix Engine REST API"
   s.email = "michael.kuehl@delphix.com"
   s.extra_rdoc_files = [
@@ -27,10 +27,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "VERSION",
-    "delphix_rb.gemspec",
-    "lib/delphix_rb.rb",
-    "test/helper.rb",
-    "test/test_delphix_rb.rb"
+    "delphix_rb.gemspec"
   ]
   s.homepage = "http://github.com/mickuehl/delphix_rb"
   s.licenses = ["MIT"]
@@ -46,12 +43,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 1.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 2.0.1"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
+      s.add_runtime_dependency(%q<excon>, ["~> 0.45.4"])
     else
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.0"])
       s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
       s.add_dependency(%q<simplecov>, [">= 0"])
+      s.add_dependency(%q<excon>, ["~> 0.45.4"])
     end
   else
     s.add_dependency(%q<shoulda>, [">= 0"])
@@ -59,6 +58,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, ["~> 1.0"])
     s.add_dependency(%q<jeweler>, ["~> 2.0.1"])
     s.add_dependency(%q<simplecov>, [">= 0"])
+    s.add_dependency(%q<excon>, ["~> 0.45.4"])
   end
 end
 
