@@ -33,7 +33,11 @@ module Delphix::Base
   def refresh_details
     # Placeholder. Subclasses need to implement this
   end
-    
+  
+  def base_endpoint
+    # Placeholder. Subclasses need to implement this
+  end
+  
   def to_s
     "#{self.class.name}[#{type}, #{name}, #{reference}]"
   end
@@ -43,9 +47,14 @@ module Delphix::Base
     Delphix.get( endpoint, payload)
   end
   
-  # a generic get method, used when there is not specialized method to invoke an API call
+  # a generic post method, used when there is not specialized method to invoke an API call
   def post(endpoint, payload)
     Delphix.post( endpoint, payload)
+  end
+  
+  # a generic delete method, used when there is not specialized method to invoke an API call
+  def delete(endpoint, payload)
+    Delphix.delete( endpoint, payload)
   end
   
 end

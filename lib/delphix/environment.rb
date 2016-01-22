@@ -9,6 +9,31 @@ class Delphix::Environment
     super(reference, details)
   end
   
+  # basic operations
+  
+  def enable
+    post("#{base_endpoint}/#{reference}/enable", nil)['result']
+  end
+  
+  def disable
+    post("#{base_endpoint}/#{reference}/disable", nil)['result']
+  end
+  
+  def delete
+    delete("#{base_endpoint}/#{reference}", nil)['result']
+  end
+  
+  # inherited operations
+  
+  def refresh_details
+    @details = get("#{base_endpoint}/#{reference}", nil)['result']
+  end
+  
+  def base_endpoint
+    '/resources/json/delphix/environment'
+  end
+  
+  # additional operations
   def repositories
     repos = Delphix::BaseArray.new
     result = get('/resources/json/delphix/repository', nil)['result']
@@ -18,9 +43,7 @@ class Delphix::Environment
     repos
   end
   
-  def refresh_details
-    @details = get("/resources/json/delphix/environment/#{reference}", nil)['result']
-  end
+  # instance methods
   
   def self.create(name, address, port, toolkit_path, username, password)
     body = {

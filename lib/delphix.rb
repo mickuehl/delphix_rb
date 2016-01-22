@@ -84,9 +84,19 @@ module Delphix
     connection.get( endpoint, {}, :body => payload)
   end
   
-  # a generic get method, used when there is not specialized method to invoke an API call
+  # a generic post method, used when there is not specialized method to invoke an API call
   def post(endpoint, payload)
     connection.post( endpoint, {}, :body => payload)
+  end
+  
+  # a generic put method, used when there is not specialized method to invoke an API call
+  def put(endpoint, payload)
+    connection.put( endpoint, {}, :body => payload)
+  end
+  
+  # a generic delete method, used when there is not specialized method to invoke an API call
+  def delete(endpoint, payload)
+    connection.delete( endpoint, {}, :body => payload)
   end
   
   def url
@@ -138,7 +148,8 @@ private
     {}
   end
   
-  module_function :get, :post, :environments, :groups, :repositories, :targets, :sources,
+  module_function :get, :post, :put, :delete,
+    :environments, :groups, :repositories,
     :authenticate!, :url, :url=, :options, :options=, :connection, :reset_connection!, :debug, :debug=,
     :env_url, :default_url, :env_options
          
