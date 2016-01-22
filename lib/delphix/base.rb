@@ -43,17 +43,17 @@ module Delphix::Base
   end
   
   # a generic get method, used when there is not specialized method to invoke an API call
-  def get(endpoint, payload)
+  def delphix_get(endpoint, payload)
     Delphix.get( endpoint, payload)
   end
   
   # a generic post method, used when there is not specialized method to invoke an API call
-  def post(endpoint, payload)
+  def delphix_post(endpoint, payload)
     Delphix.post( endpoint, payload)
   end
   
   # a generic delete method, used when there is not specialized method to invoke an API call
-  def delete(endpoint, payload)
+  def delphix_delete(endpoint, payload)
     Delphix.delete( endpoint, payload)
   end
   

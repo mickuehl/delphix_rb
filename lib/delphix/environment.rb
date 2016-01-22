@@ -12,15 +12,15 @@ class Delphix::Environment
   # basic operations
   
   def enable
-    post("#{base_endpoint}/#{reference}/enable", nil)['result']
+    delphix_post("#{base_endpoint}/#{reference}/enable", nil)['result']
   end
   
   def disable
-    post("#{base_endpoint}/#{reference}/disable", nil)['result']
+    delphix_post("#{base_endpoint}/#{reference}/disable", nil)['result']
   end
   
   def delete
-    delete("#{base_endpoint}/#{reference}", nil)['result']
+    delphix_delete("#{base_endpoint}/#{reference}", nil)['result']
   end
   
   # inherited operations
