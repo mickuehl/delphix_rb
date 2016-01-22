@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem 'excon', '~> 0.45.4'
+#gem 'excon', '~> 0.45.4'
 
 # Include everything needed to run rake, tests, features, etc.
 group :development do
