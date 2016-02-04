@@ -11,22 +11,24 @@ class Delphix::Environment
 
   # basic operations
 
+  def delete
+    Delphix.delete("#{base_endpoint}/#{reference}", nil)['result']
+  end
+
+  # specific operations
+
   def enable
-    delphix_post("#{base_endpoint}/#{reference}/enable", nil)['result']
+    Delphix.post("#{base_endpoint}/#{reference}/enable", nil)['result']
   end
 
   def disable
-    delphix_post("#{base_endpoint}/#{reference}/disable", nil)['result']
+    Delphix.post("#{base_endpoint}/#{reference}/disable", nil)['result']
   end
-
-  def delete
-    delphix_delete("#{base_endpoint}/#{reference}", nil)['result']
-  end
-
+  
   # inherited operations
 
   def refresh_details
-    @details = delphix_get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
   end
 
   def base_endpoint

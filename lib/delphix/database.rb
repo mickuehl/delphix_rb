@@ -9,13 +9,15 @@ class Delphix::Database
   # basic operations
 
   def delete
-    delphix_delete("#{base_endpoint}/#{reference}", nil)['result']
+    Delphix.delete("#{base_endpoint}/#{reference}", nil)['result']
   end
 
+  # specific operations
+  
   # inherited operations
 
   def refresh_details
-    @details = delphix_get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
   end
 
   def base_endpoint

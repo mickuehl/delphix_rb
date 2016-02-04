@@ -6,16 +6,10 @@ class Delphix::VDB
     super(reference, details)
   end
 
-  # basic operations
-
-  def delete
-
-  end
-
   # inherited operations
 
   def refresh_details
-    @details = delphix_get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
   end
 
   def base_endpoint

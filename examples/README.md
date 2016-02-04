@@ -27,3 +27,7 @@ List all groups and select one by its `name`
 ## Example 4 - Create a VDB
 
 Provisions a VDB. Shows how to lookup the basic references needed to provision the VDB.
+
+## Example 5 - Repositories
+
+Search for a specific repository on a given environment

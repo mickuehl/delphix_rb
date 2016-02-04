@@ -48,33 +48,6 @@ module Delphix
 
   end
 
-  def environments
-    envs = BaseArray.new
-    result = get('/resources/json/delphix/environment', nil)['result']
-    result.each do |env|
-      envs << Environment.new(env['reference'],env)
-    end
-    envs
-  end
-
-  def groups
-    groups = BaseArray.new
-    result = get('/resources/json/delphix/group', nil)['result']
-    result.each do |group|
-      groups << Group.new(group['reference'],group)
-    end
-    groups
-  end
-
-  def repositories
-    repos = BaseArray.new
-    result = get('/resources/json/delphix/repository', nil)['result']
-    result.each do |repo|
-      repos << Repository.new(repo['reference'],repo)
-    end
-    repos
-  end
-
   # a generic get method, used when there is not specialized method to invoke an API call
   def get(endpoint, payload)
     connection.get( endpoint, {}, :body => payload)
@@ -145,8 +118,8 @@ private
   end
 
   module_function :get, :post, :put, :delete,
-    :environments, :groups, :repositories,
-    :authenticate!, :url, :url=, :options, :options=, :connection, :reset_connection!, :debug, :debug=,
+    :authenticate!, :url, :url=, :connection, :reset_connection!,
+    :options, :options=, :debug, :debug=,
     :env_url, :default_url, :env_options
 
 end

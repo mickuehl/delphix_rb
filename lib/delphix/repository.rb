@@ -6,8 +6,43 @@ class Delphix::Repository
     super(reference, details)
   end
 
+  # basic operations
+
+  # specific operations
+  def provisioning?
+    @details['provisioningEnabled'] == true
+  end
+
+  def provisioning!(provisioning)
+    return if provisioning? == provisioning
+    body = {
+      :type => type,
+      :provisioningEnabled => provisioning
+    }
+    Delphix.post("#{base_endpoint}/#{reference}", body.to_json)
+    # TODO error handling on wait for completion!
+    refresh_details
+  end
+
+  def staging?
+    @details['staging'] == true
+  end
+
+  def staging!(staging)
+    return if staging? == staging
+    body = {
+      :type => type,
+      :staging => staging
+    }
+    Delphix.post("#{base_endpoint}/#{reference}", body.to_json)
+    # TODO error handling on wait for completion!
+    refresh_details
+  end
+
+  # inherited operations
+
   def refresh_details
-    @details = delphix_get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
   end
 
   def base_endpoint
