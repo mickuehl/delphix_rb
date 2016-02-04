@@ -23,7 +23,14 @@ group = Delphix::Group.list.lookup_by_name 'DEV'
 dsource = Delphix::Database.list.lookup_by_name 'CRM_SOURCE'
 
 # lookup the repository reference, i.e. the DB installation on the target Environment
-repository = Delphix::Repository.list.lookup_by_ref 'MYSQL_INSTALL-2'
+lookup a specific DB installation on a given environment
+environment = Delphix::Environment.list.lookup_by_name 'target'
+
+# discover all repositories
+repos = Delphix::Repository.list
+repos_on_target = repos.filter_by 'environment', environment.reference
+repos = repos_on_target.filter_by 'type', 'MySQLInstall'
+repository = repos.first # there could be more than one though !
 
 # provision a new VDB now that we have the basic details
 vdb = Delphix::VDB.create 'CRM_DEV', dsource.reference, group.reference, repository.reference, '/home/delphix/toolkit/V', 5506
