@@ -16,10 +16,8 @@ Delphix.debug = true
 # authenticate the connection
 Delphix.authenticate!('delphix_admin','delphix')
 
-groups = Delphix.groups
+groups = Delphix::Group.list
 group = groups.lookup_by_name 'FOO'
-
-puts group
 
 # delete the group
 group.delete

@@ -29,7 +29,7 @@ class Delphix::Group
       :type => 'Group',
       :name => name
     }
-    ref = Delphix.post(base_endpoint, body.to_json)['result']
+    ref = Delphix.post('/resources/json/delphix/group', body.to_json)['result']
 
     # create a new skeleton group object
     group = Delphix::Group.new ref
