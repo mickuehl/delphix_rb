@@ -23,7 +23,6 @@ group = Delphix::Group.list.lookup_by_name 'DEV'
 dsource = Delphix::Database.list.lookup_by_name 'CRM_SOURCE'
 
 # lookup the repository reference, i.e. the DB installation on the target Environment
-lookup a specific DB installation on a given environment
 environment = Delphix::Environment.list.lookup_by_name 'target'
 
 # discover all repositories
