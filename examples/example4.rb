@@ -33,4 +33,4 @@ repos = repos_on_target.filter_by 'type', 'MySQLInstall'
 repository = repos.first # there could be more than one though !
 
 # provision a new VDB now that we have the basic details
-vdb = Delphix::VDB.create 'CRM_DEV', dsource.reference, group.reference, repository.reference, '/home/delphix/toolkit/V', 5506
+vdb = Delphix::Database.create_vdb 'CRM_DEV', dsource.reference, group.reference, repository.reference, '/home/delphix/toolkit/V', 5506

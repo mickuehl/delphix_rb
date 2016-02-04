@@ -9,15 +9,15 @@ class Delphix::Group
   # basic operations
 
   def delete
-    Delphix.delete("#{base_endpoint}/#{reference}", nil)['result']
+    Delphix.delete("#{base_endpoint}/#{reference}")['result']
   end
 
   # specific operations
-  
+
   # inherited operations
 
   def refresh_details
-    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
   end
 
   def base_endpoint
@@ -44,7 +44,7 @@ class Delphix::Group
 
   def self.list
     groups = Delphix::BaseArray.new
-    result = Delphix.get('/resources/json/delphix/group', nil)['result']
+    result = Delphix.get('/resources/json/delphix/group')['result']
     result.each do |group|
       groups << Delphix::Group.new(group['reference'],group)
     end

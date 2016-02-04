@@ -12,23 +12,23 @@ class Delphix::Environment
   # basic operations
 
   def delete
-    Delphix.delete("#{base_endpoint}/#{reference}", nil)['result']
+    Delphix.delete("#{base_endpoint}/#{reference}")['result']
   end
 
   # specific operations
 
   def enable
-    Delphix.post("#{base_endpoint}/#{reference}/enable", nil)['result']
+    Delphix.post("#{base_endpoint}/#{reference}/enable")['result']
   end
 
   def disable
-    Delphix.post("#{base_endpoint}/#{reference}/disable", nil)['result']
+    Delphix.post("#{base_endpoint}/#{reference}/disable")['result']
   end
-  
+
   # inherited operations
 
   def refresh_details
-    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
   end
 
   def base_endpoint
@@ -78,7 +78,7 @@ class Delphix::Environment
 
   def self.list
     envs = Delphix::BaseArray.new
-    result = Delphix.get('/resources/json/delphix/environment', nil)['result']
+    result = Delphix.get('/resources/json/delphix/environment')['result']
     result.each do |env|
       envs << Delphix::Environment.new(env['reference'],env)
     end

@@ -31,3 +31,7 @@ Provisions a VDB. Shows how to lookup the basic references needed to provision t
 ## Example 5 - Repositories
 
 Search for a specific repository on a given environment
+
+## Example 6 - databases
+
+List all databases (dSource and VDB)

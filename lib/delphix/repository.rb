@@ -42,7 +42,7 @@ class Delphix::Repository
   # inherited operations
 
   def refresh_details
-    @details = Delphix.get("#{base_endpoint}/#{reference}", nil)['result']
+    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
   end
 
   def base_endpoint
@@ -53,7 +53,7 @@ class Delphix::Repository
 
   def self.list
     repos = Delphix::BaseArray.new
-    result = Delphix.get('/resources/json/delphix/repository', nil)['result']
+    result = Delphix.get('/resources/json/delphix/repository')['result']
     result.each do |repo|
       repos << Delphix::Repository.new(repo['reference'],repo)
     end

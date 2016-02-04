@@ -12,7 +12,6 @@ module Delphix
   require 'delphix/environment'
   require 'delphix/group'
   require 'delphix/repository'
-  require 'delphix/vdb'
   require 'delphix/database'
 
   def authenticate!(username,password)
@@ -49,22 +48,22 @@ module Delphix
   end
 
   # a generic get method, used when there is not specialized method to invoke an API call
-  def get(endpoint, payload)
+  def get(endpoint, payload=nil)
     connection.get( endpoint, {}, :body => payload)
   end
 
   # a generic post method, used when there is not specialized method to invoke an API call
-  def post(endpoint, payload)
+  def post(endpoint, payload=nil)
     connection.post( endpoint, {}, :body => payload)
   end
 
   # a generic put method, used when there is not specialized method to invoke an API call
-  def put(endpoint, payload)
+  def put(endpoint, payload=nil)
     connection.put( endpoint, {}, :body => payload)
   end
 
   # a generic delete method, used when there is not specialized method to invoke an API call
-  def delete(endpoint, payload)
+  def delete(endpoint, payload=nil)
     connection.delete( endpoint, {}, :body => payload)
   end
 
