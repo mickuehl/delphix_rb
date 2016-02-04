@@ -74,4 +74,13 @@ class Delphix::Environment
     env
   end
 
+  def self.list
+    envs = Delphix::BaseArray.new
+    result = Delphix.get('/resources/json/delphix/environment', nil)['result']
+    result.each do |env|
+      envs << Delphix::Environment.new(env['reference'],env)
+    end
+    envs
+  end
+
 end

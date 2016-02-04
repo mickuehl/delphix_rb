@@ -17,7 +17,7 @@ Delphix.debug = true
 Delphix.authenticate!('delphix_admin','delphix')
 
 # discover the environment(s)
-environments = Delphix.environments
+environments = Delphix::Environment.list
 environment = environments.lookup_by_name SOURCE_ENV_NAME
 
 puts "env=#{environment}"
