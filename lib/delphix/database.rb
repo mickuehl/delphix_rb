@@ -14,6 +14,14 @@ class Delphix::Database
 
   # specific operations
 
+  def start
+    Delphix.post("/resources/json/delphix/source/#{lookup_source_ref}/start")['result']
+  end
+
+  def stop
+    Delphix.post("/resources/json/delphix/source/#{lookup_source_ref}/stop")['result']
+  end
+
   # inherited operations
 
   def refresh_details
@@ -65,6 +73,14 @@ class Delphix::Database
 
     response = Delphix.post('/resources/json/delphix/database/provision', body.to_json)
     response
+  end
+
+  private
+
+  def lookup_source_ref
+    sources = Delphix::Source.list
+    source = sources.filter_by 'container', reference
+    source[0].reference # FIXME assumes there is only one ...
   end
 
 end
