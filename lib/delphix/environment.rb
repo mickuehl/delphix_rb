@@ -25,6 +25,30 @@ class Delphix::Environment
     Delphix.post("#{base_endpoint}/#{reference}/disable")['result']
   end
 
+  def start_vdb
+
+    sources = lookup_sources
+    return if sources == nil
+
+    # stop them all
+    sources.each do |src|
+      src.start
+    end
+
+  end
+
+  def stop_vdb
+
+    sources = lookup_sources
+    return if sources == nil
+
+    # stop them all
+    sources.each do |src|
+      src.stop
+    end
+
+  end
+
   # inherited operations
 
   def refresh_details
@@ -83,6 +107,43 @@ class Delphix::Environment
       envs << Delphix::Environment.new(env['reference'],env)
     end
     envs
+  end
+
+  private
+
+  def lookup_sources
+    repos = Delphix::Repository.list
+    repos = repos.filter_by 'environment', reference
+
+    # lookup sourceconfigs that are related to this environment
+    configs = Delphix::SourceConfig.list
+    sourceconfigs = Delphix::BaseArray.new
+    repos.each do |repo|
+      result = configs.filter_by 'repository', repo.reference
+      if result != nil
+        result.each do |i|
+          sourceconfigs << i
+        end
+      end
+    end
+
+    # find the matching sources
+    sources = Delphix::Source.list
+
+    # filter to match sourceconfigs
+    vdb_sources = Delphix::BaseArray.new
+    sourceconfigs.each do |conf|
+      result = sources.filter_by 'config', conf.reference
+      if result != nil
+        result.each do |i|
+          vdb_sources << i
+        end
+      end
+    end
+
+    return nil if vdb_sources.size == 0
+    vdb_sources
+
   end
 
 end

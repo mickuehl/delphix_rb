@@ -1,5 +1,5 @@
 
-class Delphix::Source
+class Delphix::SourceConfig
   include Delphix::Base
 
   def initialize(reference, details=nil)
@@ -9,13 +9,6 @@ class Delphix::Source
   # basic operations
 
   # specific operations
-  def start
-    Delphix.post("#{base_endpoint}/#{reference}/start")
-  end
-
-  def stop
-    Delphix.post("#{base_endpoint}/#{reference}/stop")
-  end
 
   # inherited operations
 
@@ -24,16 +17,16 @@ class Delphix::Source
   end
 
   def base_endpoint
-    '/resources/json/delphix/source'
+    '/resources/json/delphix/sourceconfig'
   end
 
   # class methods
 
   def self.list
     sources = Delphix::BaseArray.new
-    result = Delphix.get('/resources/json/delphix/source')['result']
+    result = Delphix.get('/resources/json/delphix/sourceconfig')['result']
     result.each do |src|
-      sources << Delphix::Source.new(src['reference'],src)
+      sources << Delphix::SourceConfig.new(src['reference'],src)
     end
     sources
   end

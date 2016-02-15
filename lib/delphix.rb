@@ -14,6 +14,7 @@ module Delphix
   require 'delphix/repository'
   require 'delphix/database'
   require 'delphix/source'
+  require 'delphix/sourceconfig'
 
   def authenticate!(username,password)
 

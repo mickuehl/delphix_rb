@@ -14,6 +14,10 @@ Register a new `environment` in the Delphix Engine
 
 List all environments and select one by its `name`
 
+### Example 2_3
+
+Disable all VDBs on a given environment
+
 ## Example 3 - Groups
 
 ### Example 3_1
@@ -32,6 +36,12 @@ Provisions a VDB. Shows how to lookup the basic references needed to provision t
 
 Search for a specific repository on a given environment
 
-## Example 6 - databases
+## Example 6 - Databases
+
+### Example 6_1
 
 List all databases (dSource and VDB)
+
+### Example 6_2
+
+Stop and re-start a VDB
