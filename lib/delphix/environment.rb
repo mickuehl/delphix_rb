@@ -21,32 +21,21 @@ class Delphix::Environment
     Delphix.post("#{base_endpoint}/#{reference}/enable")['result']
   end
 
-  def disable
+  def disable(force_disable=true)
+
+    if force_disable
+      # stop and disable all sources on this environment
+      sources = lookup_sources
+      if sources != nil
+        sources.each do |src|
+          src.stop if src.virtual?
+          src.disable
+        end
+      end
+    end
+
+    # now disable the environment itself
     Delphix.post("#{base_endpoint}/#{reference}/disable")['result']
-  end
-
-  def start_vdb
-
-    sources = lookup_sources
-    return if sources == nil
-
-    # stop them all
-    sources.each do |src|
-      src.start
-    end
-
-  end
-
-  def stop_vdb
-
-    sources = lookup_sources
-    return if sources == nil
-
-    # stop them all
-    sources.each do |src|
-      src.stop
-    end
-
   end
 
   # inherited operations

@@ -17,6 +17,18 @@ class Delphix::Source
     Delphix.post("#{base_endpoint}/#{reference}/stop")
   end
 
+  def enable
+    Delphix.post("#{base_endpoint}/#{reference}/enable")
+  end
+
+  def disable
+    Delphix.post("#{base_endpoint}/#{reference}/disable")
+  end
+
+  def virtual?
+    @details['virtual'] == true
+  end
+
   # inherited operations
 
   def refresh_details
