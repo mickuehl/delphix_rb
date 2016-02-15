@@ -19,6 +19,7 @@ Delphix.authenticate!('delphix_admin','delphix')
 databases = Delphix::Database.list
 db = databases.lookup_by_name 'CRM_TARGET'
 
-db.stop
-
-db.start
+puts '---'
+puts db.details
+#db.stop
+#db.start
