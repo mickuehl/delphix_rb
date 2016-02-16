@@ -11,7 +11,21 @@ class Delphix::Environment
 
   # basic operations
 
-  def delete
+  def delete(delete_all_sources=true)
+
+    if delete_all_sources
+      # stop and delete all sources on this environment
+      sources = lookup_sources
+      if sources != nil
+        sources.each do |src|
+          if src.virtual?
+            src.stop.wait_for_completion
+          end
+          src.delete.wait_for_completion
+        end
+      end
+    end
+
     Delphix::Response.new( Delphix.delete("#{base_endpoint}/#{reference}"))
   end
 
