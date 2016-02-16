@@ -12,34 +12,49 @@ class Delphix::Environment
   # basic operations
 
   def delete
-    Delphix.delete("#{base_endpoint}/#{reference}")['result']
+    Delphix::Response.new( Delphix.delete("#{base_endpoint}/#{reference}"))
   end
 
   # specific operations
 
-  def enable
-    Delphix.post("#{base_endpoint}/#{reference}/enable")['result']
+  def enable(enable_all_sources=false)
+    resp = Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/enable"))
+    return resp if !enable_all_sources
+
+    resp.wait_for_completion
+
+    # enable all sources on this environment
+    sources = lookup_sources
+    if sources != nil
+      sources.each do |src|
+        src.enable.wait_for_completion
+      end
+    end
+
+    resp
   end
 
-  def disable(force_disable=true)
+  def disable(disable_all_sources=true)
 
-    if force_disable
+    if disable_all_sources
       # stop and disable all sources on this environment
       sources = lookup_sources
       if sources != nil
         sources.each do |src|
-          src.stop if src.virtual?
-          src.disable
+          if src.virtual?
+            src.stop.wait_for_completion
+          end
+          src.disable.wait_for_completion
         end
       end
     end
 
     # now disable the environment itself
-    Delphix.post("#{base_endpoint}/#{reference}/disable")['result']
+    Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/disable"))
   end
 
   def refresh
-    Delphix.post("#{base_endpoint}/#{reference}/refresh")['result']
+    Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/refresh"))
   end
 
   # inherited operations
@@ -79,16 +94,17 @@ class Delphix::Environment
         }
       }
     }
-    response = Delphix.post('/resources/json/delphix/environment', body.to_json)
+
+    # create the environment
+    resp = Delphix::Response.new( Delphix.post('/resources/json/delphix/environment', body.to_json))
+    return nil if resp.is_error?
 
     # wait until the environment has been created
-    job = Delphix::Job.new(response['job'])
-    job.wait_for_completion
+    resp.job.wait_for_completion
 
     # create a new skeleton environment object
-    env = Delphix::Environment.new response['result']
-
-    # refresh the object from the DE
+    env = Delphix::Environment.new resp.details
+    # and refresh the object from the engine
     env.refresh_details
 
     env

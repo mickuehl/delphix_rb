@@ -2,10 +2,6 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'delphix'
 
-#
-# basic authentication
-#
-
 SOURCE_ENV_NAME = "source"
 
 # set the DE url
@@ -16,8 +12,7 @@ Delphix.debug = true
 # authenticate the connection
 Delphix.authenticate!('delphix_admin','delphix')
 
-# discover the environment(s)
-environments = Delphix::Environment.list
-environment = environments.lookup_by_name SOURCE_ENV_NAME
+# discover the environment
+environment = Delphix::Environment.list.lookup_by_name SOURCE_ENV_NAME
 
 puts "env=#{environment}"

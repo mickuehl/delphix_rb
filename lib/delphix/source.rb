@@ -10,19 +10,19 @@ class Delphix::Source
 
   # specific operations
   def start
-    Delphix.post("#{base_endpoint}/#{reference}/start")
+    Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/start"))
   end
 
   def stop
-    Delphix.post("#{base_endpoint}/#{reference}/stop")
+    Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/stop"))
   end
 
   def enable
-    Delphix.post("#{base_endpoint}/#{reference}/enable")
+    Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/enable"))
   end
 
   def disable
-    Delphix.post("#{base_endpoint}/#{reference}/disable")
+    Delphix::Response.new( Delphix.post("#{base_endpoint}/#{reference}/disable"))
   end
 
   def virtual?

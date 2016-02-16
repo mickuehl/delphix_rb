@@ -9,7 +9,7 @@ class Delphix::Group
   # basic operations
 
   def delete
-    Delphix.delete("#{base_endpoint}/#{reference}")['result']
+    Delphix::Response.new( Delphix.delete("#{base_endpoint}/#{reference}"))
   end
 
   # specific operations

@@ -2,12 +2,6 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'delphix'
 
-#
-# basic authentication
-#
-
-SOURCE_ENV_NAME = "source"
-
 # set the DE url
 Delphix.url = 'http://de.delphix.local'
 # enable debug outputs
@@ -32,9 +26,9 @@ repos = repos_on_target.filter_by 'type', 'MySQLInstall'
 repository = repos.first # there could be more than one though !
 
 # provision a new VDB now that we have the basic details
-Delphix::Database.create_vdb 'CRM_DEV', dsource.reference, group.reference, repository.reference, '/home/delphix/toolkit/V', 5506
+resp = Delphix::Database.create_vdb 'CRM_DEV', dsource.reference, group.reference, repository.reference, '/home/delphix/toolkit/V', 5507
+resp.wait_for_completion
 
 db = Delphix::Database.list.lookup_by_name 'CRM_DEV'
-
 puts db
 puts db.details

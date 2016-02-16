@@ -9,17 +9,17 @@ class Delphix::Database
   # basic operations
 
   def delete
-    Delphix.delete("#{base_endpoint}/#{reference}")['result']
+    Delphix::Response.new( Delphix.delete("#{base_endpoint}/#{reference}"))
   end
 
   # specific operations
 
   def start
-    Delphix.post("/resources/json/delphix/source/#{lookup_source_ref}/start")['result']
+    Delphix::Response.new( Delphix.post("/resources/json/delphix/source/#{lookup_source_ref}/start"))
   end
 
   def stop
-    Delphix.post("/resources/json/delphix/source/#{lookup_source_ref}/stop")['result']
+    Delphix::Response.new( Delphix.post("/resources/json/delphix/source/#{lookup_source_ref}/stop"))
   end
 
   # inherited operations
@@ -71,8 +71,8 @@ class Delphix::Database
       }
     }
 
-    response = Delphix.post('/resources/json/delphix/database/provision', body.to_json)
-    response
+    Delphix::Response.new( Delphix.post('/resources/json/delphix/database/provision', body.to_json))
+    
   end
 
   private

@@ -12,15 +12,10 @@ Delphix.debug = true
 # authenticate the connection
 Delphix.authenticate!('delphix_admin','delphix')
 
-# discover the environment(s)
-environments = Delphix::Environment.list
-environment = environments.lookup_by_name SOURCE_ENV_NAME
+# discover the environment
+environment = Delphix::Environment.list.lookup_by_name SOURCE_ENV_NAME
 
-puts environment.refresh
+resp = environment.refresh
 
-#jobs = Delphix::Job.list
-#job = jobs.first # the most recent job
-
-#puts jobs
-#puts '---'
-#puts job.cancel!
+job = resp.job
+job.wait_for_completion

@@ -9,6 +9,8 @@ module Delphix
   require 'delphix/connection'
   require 'delphix/base'
   require 'delphix/base_array'
+  require 'delphix/response'
+
   require 'delphix/environment'
   require 'delphix/group'
   require 'delphix/repository'
@@ -16,7 +18,7 @@ module Delphix
   require 'delphix/source'
   require 'delphix/sourceconfig'
   require 'delphix/job'
-
+  
   def authenticate!(username,password)
 
     case
