@@ -43,10 +43,6 @@ class Delphix::Job
     "#{self.class.name}[#{@details['actionType']}, #{reference}, #{@details['jobState']}]"
   end
 
-  def refresh_details
-    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
-  end
-
   def base_endpoint
     '/resources/json/delphix/job'
   end

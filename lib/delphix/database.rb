@@ -24,10 +24,6 @@ class Delphix::Database
 
   # inherited operations
 
-  def refresh_details
-    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
-  end
-
   def base_endpoint
     '/resources/json/delphix/database'
   end
@@ -72,7 +68,7 @@ class Delphix::Database
     }
 
     Delphix::Response.new( Delphix.post('/resources/json/delphix/database/provision', body.to_json))
-    
+
   end
 
   private

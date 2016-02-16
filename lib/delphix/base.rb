@@ -32,7 +32,8 @@ module Delphix::Base
   end
 
   def refresh_details
-    # Placeholder. Subclasses need to implement this
+    # TODO Subclasses should override this if needed
+    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
   end
 
   def base_endpoint

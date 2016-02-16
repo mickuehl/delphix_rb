@@ -41,10 +41,6 @@ class Delphix::Repository
 
   # inherited operations
 
-  def refresh_details
-    @details = Delphix.get("#{base_endpoint}/#{reference}")['result']
-  end
-
   def base_endpoint
     '/resources/json/delphix/repository'
   end
