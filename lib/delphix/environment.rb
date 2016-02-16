@@ -38,6 +38,10 @@ class Delphix::Environment
     Delphix.post("#{base_endpoint}/#{reference}/disable")['result']
   end
 
+  def refresh
+    Delphix.post("#{base_endpoint}/#{reference}/refresh")['result']
+  end
+
   # inherited operations
 
   def refresh_details
@@ -77,11 +81,12 @@ class Delphix::Environment
     }
     response = Delphix.post('/resources/json/delphix/environment', body.to_json)
 
-    ref = response['result']
-    job = response['job']
+    # wait until the environment has been created
+    job = Delphix::Job.new(response['job'])
+    job.wait_for_completion
 
-    # create a new skeleton group object
-    env = Delphix::Environment.new ref
+    # create a new skeleton environment object
+    env = Delphix::Environment.new response['result']
 
     # refresh the object from the DE
     env.refresh_details

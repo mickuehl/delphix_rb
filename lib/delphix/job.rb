@@ -23,6 +23,20 @@ class Delphix::Job
     Delphix.post("#{base_endpoint}/#{reference}/cancel")['result']
   end
 
+  def suspend!
+    Delphix.post("#{base_endpoint}/#{reference}/suspend")['result']
+  end
+
+  def resume!
+    Delphix.post("#{base_endpoint}/#{reference}/resume")['result']
+  end
+
+  def wait_for_completion
+    begin
+      sleep 1
+    end while state? == 'RUNNING'
+  end
+
   # inherited operations
 
   def to_s

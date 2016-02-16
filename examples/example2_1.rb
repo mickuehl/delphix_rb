@@ -18,6 +18,6 @@ Delphix.debug = true
 Delphix.authenticate!('delphix_admin','delphix')
 
 # register a new environment
-source = Delphix::Environment.create SOURCE_ENV_NAME, '172.16.138.42', 22, '/home/delphix/toolkit', 'delphix', 'delphix'
+source = Delphix::Environment.create SOURCE_ENV_NAME, '172.16.138.200', 22, '/home/delphix/toolkit', 'delphix', 'delphix'
 
 puts source

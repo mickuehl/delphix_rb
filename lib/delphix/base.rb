@@ -4,8 +4,9 @@ module Delphix::Base
 
   attr_accessor :details
 
-  # The private new method accepts a connection and a hash
+  # The private new method accepts a reference string and a hash
   def initialize(reference=nil, details=nil)
+    # FIXME change this, passing the reference does not make sense !!!
     if details == nil
       @details = { 'reference' => reference }
     else
@@ -41,5 +42,5 @@ module Delphix::Base
   def to_s
     "#{self.class.name}[#{type}, #{name}, #{reference}]"
   end
-    
+
 end
