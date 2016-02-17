@@ -17,11 +17,21 @@ class Delphix::Environment
       # stop and delete all sources on this environment
       sources = lookup_sources
       if sources != nil
+        containers = {}
+
+        # build a list of unique container references
         sources.each do |src|
-          if src.virtual?
-            src.stop.wait_for_completion
-          end
-          src.delete.wait_for_completion
+          container_ref = src.details['container']
+          containers[container_ref] = container_ref
+        end
+
+        # get a list of all databases
+        databases = Delphix::Database.list
+
+        # now delete all containers(databases)
+        containers.keys.each do |ref|
+          db = databases.lookup_by_ref ref
+          db.delete.wait_for_completion
         end
       end
     end
